@@ -3,8 +3,22 @@ import Papa from 'papaparse'
 import { ComposedChart, Area, XAxis, YAxis, Tooltip as RTooltip, ResponsiveContainer, CartesianGrid, Legend, BarChart, Bar, Line } from 'recharts'
 import { Download, Upload, Share2, RefreshCcw, Database, Search, Calendar } from 'lucide-react'
 
+
+
+interface ProgressBarProps {
+  percent: number;
+  label: string;
+}
+
+interface KpiCardProps {
+  title: string;
+  value: number | string;
+  hint: string;
+}
+
+
 // Missing components - implementing inline
-const ProgressBar = ({ percent, label }) => (
+const ProgressBar: React.FC<ProgressBarProps> = ({ percent, label }) => (
   <div className="w-full">
     <div className="w-full bg-gray-200 rounded-full h-2">
       <div 
@@ -16,13 +30,15 @@ const ProgressBar = ({ percent, label }) => (
   </div>
 )
 
-const KpiCard = ({ title, value, hint }) => (
+const KpiCard: React.FC<KpiCardProps> = ({ title, value, hint }) => (
   <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
     <div className="text-sm text-gray-500 font-medium">{title}</div>
     <div className="text-2xl font-bold text-gray-900 mt-1">{value}</div>
     <div className="text-xs text-gray-400 mt-1">{hint}</div>
   </div>
 )
+
+
 
 const REQUIRED_FIELDS = [
   { key: 'date', label: 'Date' },
@@ -397,12 +413,16 @@ export default function App() {
             setRows(parsed)
             
             // Automatically set up column mapping if headers match expected names
-            const autoMapping = {}
-            REQUIRED_FIELDS.forEach(field => {
-              const exactMatch = headers.find(h => h.toLowerCase() === field.key.toLowerCase())
-              const partialMatch = headers.find(h => h.toLowerCase().includes(field.key.toLowerCase()))
-              autoMapping[field.key] = exactMatch || partialMatch || field.key
-            })
+          type FieldKey = typeof REQUIRED_FIELDS[number]['key'];
+
+const autoMapping: Record<FieldKey, string> = {} as Record<FieldKey, string>;
+
+REQUIRED_FIELDS.forEach(field => {
+  const exactMatch = headers.find(h => h.toLowerCase() === field.key.toLowerCase());
+  const partialMatch = headers.find(h => h.toLowerCase().includes(field.key.toLowerCase()));
+  autoMapping[field.key] = exactMatch || partialMatch || field.key;
+});
+
             console.log('Auto-detected column mapping:', autoMapping)
             setMapping(autoMapping)
             
@@ -413,7 +433,7 @@ export default function App() {
               console.groupEnd()
             }, 300)
           },
-          error: (err) => {
+          error: (err:Error) => {
             console.error('❌ CSV Parse Error:', err)
             alert('Parse error: ' + (err?.message || ''))
             setIsUploading(false)
