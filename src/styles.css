@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+
+.card { @apply bg-white rounded-2xl shadow-sm border border-slate-200; }
+.btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 border text-sm; }
+.btn-primary { @apply bg-slate-900 text-white border-slate-900; }
+.btn-outline { @apply bg-white text-slate-700 border-slate-300; }
+.kpi { @apply p-4; }
+.input { @apply w-full h-10 rounded-md border border-slate-300 px-3 text-sm; }
+.select { @apply w-full h-10 rounded-md border border-slate-300 px-3 text-sm bg-white; }
+.badge { @apply inline-flex items-center gap-1 rounded-full border border-slate-300 bg-slate-50 px-2 py-1 text-xs text-slate-600; }
+.progress { @apply h-2 w-full rounded bg-slate-200 overflow-hidden; }
+.progress > div { @apply h-full bg-sky-500 transition-all; }
