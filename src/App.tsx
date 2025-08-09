@@ -529,13 +529,13 @@ export default function App() {
           </div>
           <div className="flex items-center gap-2">
             {uploadFileName && <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs max-w-[240px] truncate" title={uploadFileName}>{uploadFileName}</span>}
-            <button className="px-3 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-50" onClick={exportState}>
+            {/* <button className="px-3 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-50" onClick={exportState}>
               <Share2 size={16} className="inline mr-1"/> Export State
             </button>
             <label className="px-3 py-2 border border-gray-300 rounded-md text-sm hover:bg-gray-50 cursor-pointer">
               <input type="file" accept="application/json" className="hidden" onChange={importState} />
               <span className="inline-flex items-center gap-1"><Share2 size={16}/> Import State</span>
-            </label>
+            </label> */}
             <button className="px-3 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700" onClick={resetAll}>
               <RefreshCcw size={16} className="inline mr-1"/> Reset
             </button>
