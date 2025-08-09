@@ -434,7 +434,7 @@ REQUIRED_FIELDS.forEach(field => {
             }, 300)
           },
           error: (err:Error) => {
-            console.error('❌ CSV Parse Error:', err)
+            console.error('❌ CSV Parse Error-', err)
             alert('Parse error: ' + (err?.message || ''))
             setIsUploading(false)
             console.groupEnd()
